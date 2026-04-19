@@ -10,8 +10,9 @@ export function generateStaticParams() {
   }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const template = allHandoverTemplates.find((t) => t.id === params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const template = allHandoverTemplates.find((t) => t.id === slug);
   if (!template) return { title: "Template Not Found" };
   return {
     title: template.title,
@@ -19,8 +20,9 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   };
 }
 
-export default function HandoverTemplatePage({ params }: { params: { slug: string } }) {
-  const template = allHandoverTemplates.find((t) => t.id === params.slug);
+export default async function HandoverTemplatePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const template = allHandoverTemplates.find((t) => t.id === slug);
 
   if (!template) {
     return (
@@ -48,6 +50,18 @@ export default function HandoverTemplatePage({ params }: { params: { slug: strin
         <PrintButton />
       </div>
 
+      {/* Print-only header */}
+      <div className="hidden print:block print-header">
+        <div className="flex justify-between items-center border-b-2 border-black pb-2 mb-4">
+          <div>
+            <span className="text-lg font-bold">CareKit</span>
+          </div>
+          <div className="text-right">
+            <span className="text-sm font-semibold">{template.title}</span>
+          </div>
+        </div>
+      </div>
+
       {/* Form Fields */}
       <div className="bg-surface rounded-xl border border-border p-6 sm:p-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
@@ -57,7 +71,7 @@ export default function HandoverTemplatePage({ params }: { params: { slug: strin
         </div>
 
         {/* Signature area */}
-        <div className="mt-8 pt-6 border-t border-border">
+        <div className="mt-8 pt-6 border-t border-border print-disclaimer">
           <p className="text-xs text-muted">
             This template is for guidance only. Adapt it to meet your organisation&apos;s specific 
             policies and procedures. Always follow your employer&apos;s handover protocols and 

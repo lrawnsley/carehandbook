@@ -45,28 +45,139 @@ body {
 }
 
 @media print {
+  /* Hide non-essential elements */
   .no-print {
     display: none !important;
   }
 
+  /* Base print styles */
   body {
-    background: white;
-    color: black;
-    font-size: 12pt;
+    background: white !important;
+    color: black !important;
+    font-size: 11pt;
+    line-height: 1.4;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 
+  /* Print container full width */
   .print-container {
-    max-width: 100%;
-    padding: 0;
-    margin: 0;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 
-  h1 { font-size: 18pt; }
-  h2 { font-size: 14pt; }
-  h3 { font-size: 12pt; }
+  /* Print-only header */
+  .print-header {
+    margin-bottom: 12pt;
+    padding-bottom: 6pt;
+  }
+
+  .print-header span {
+    color: black !important;
+  }
+
+  /* Typography */
+  h1 { font-size: 16pt !important; color: black !important; margin-bottom: 4pt; }
+  h2 { font-size: 13pt !important; color: black !important; }
+  h3 { font-size: 11pt !important; color: black !important; }
 
   a {
-    color: black;
-    text-decoration: none;
+    color: black !important;
+    text-decoration: none !important;
+  }
+
+  p, li, span, label {
+    color: black !important;
+  }
+
+  /* Form container: white background, clean border */
+  .bg-surface {
+    background: white !important;
+    border: 1pt solid black !important;
+    border-radius: 0 !important;
+    padding: 12pt !important;
+  }
+
+  /* Rounded categories/tags become plain text */
+  .rounded-full {
+    border-radius: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    color: black !important;
+    font-weight: 600 !important;
+  }
+
+  /* Form fields: solid borders, no hover, no gray background */
+  .print-field,
+  .border-dashed {
+    border: 1pt solid black !important;
+    border-style: solid !important;
+    background: white !important;
+    min-height: 20pt !important;
+  }
+
+  /* Remove hover states in print */
+  .hover\:border-primary\/30,
+  .hover\:bg-primary-light\/50,
+  .hover\:border-primary\/50 {
+    border-color: inherit !important;
+    background-color: inherit !important;
+  }
+
+  /* Tables in print: solid borders */
+  .print-table {
+    border-collapse: collapse !important;
+  }
+
+  .print-table th,
+  .print-table td {
+    border: 1pt solid black !important;
+    padding: 3pt 4pt !important;
+    background: white !important;
+    color: black !important;
+  }
+
+  .print-table th {
+    background: #f0f0f0 !important;
+    font-weight: 600 !important;
+  }
+
+  /* Avoid page breaks inside field groups */
+  .print-container > div,
+  .bg-surface > div,
+  .grid > div {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Disclaimer styling */
+  .print-disclaimer {
+    margin-top: 12pt !important;
+    padding-top: 8pt !important;
+    border-top: 1pt solid black !important;
+  }
+
+  .print-disclaimer p {
+    font-size: 8pt !important;
+    color: #333 !important;
+  }
+
+  /* Grid: single column in print for better readability */
+  .grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Hide screen-only elements */
+  button,
+  .print\\:hidden {
+    /* print:hidden handled by tailwind */
+  }
+
+  /* A4 page margins */
+  @page {
+    size: A4;
+    margin: 15mm 12mm;
   }
 }

@@ -10,8 +10,9 @@ export function generateStaticParams() {
   }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const template = careTemplates.find((t) => t.id === params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const template = careTemplates.find((t) => t.id === slug);
   if (!template) return { title: "Template Not Found" };
   return {
     title: template.title,
@@ -19,8 +20,9 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   };
 }
 
-export default function CareTemplatePage({ params }: { params: { slug: string } }) {
-  const template = careTemplates.find((t) => t.id === params.slug);
+export default async function CareTemplatePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const template = careTemplates.find((t) => t.id === slug);
 
   if (!template) {
     return (
@@ -51,6 +53,18 @@ export default function CareTemplatePage({ params }: { params: { slug: string } 
         <PrintButton />
       </div>
 
+      {/* Print-only header */}
+      <div className="hidden print:block print-header">
+        <div className="flex justify-between items-center border-b-2 border-black pb-2 mb-4">
+          <div>
+            <span className="text-lg font-bold">CareKit</span>
+          </div>
+          <div className="text-right">
+            <span className="text-sm font-semibold">{template.title}</span>
+          </div>
+        </div>
+      </div>
+
       {/* Form Fields */}
       {template.fields && (
         <div className="bg-surface rounded-xl border border-border p-6 sm:p-8">
@@ -60,7 +74,7 @@ export default function CareTemplatePage({ params }: { params: { slug: string } 
             ))}
           </div>
 
-          <div className="mt-8 pt-6 border-t border-border">
+          <div className="mt-8 pt-6 border-t border-border print-disclaimer">
             <p className="text-xs text-muted">
               This template is for guidance only. Adapt it to meet your organisation&apos;s specific 
               policies and procedures. Always follow your employer&apos;s protocols and current CQC standards.

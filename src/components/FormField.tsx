@@ -7,9 +7,9 @@ export default function FormField({ field }: { field: { label: string; type: str
         {field.label}
       </label>
       {field.type === "textarea" ? (
-        <div className="w-full min-h-[80px] border-2 border-dashed border-gray-300 rounded-lg p-3 text-sm text-muted bg-gray-50/50 hover:border-primary/30 transition-colors">
+        <div className="w-full min-h-[80px] border-2 border-dashed border-gray-300 rounded-lg p-3 text-sm text-muted bg-gray-50/50 hover:border-primary/30 transition-colors print-field">
           {field.rows ? (
-            <table className="w-full text-xs border-collapse">
+            <table className="w-full text-xs border-collapse print-table">
               <thead>
                 <tr>
                   {field.rows[0]?.map((header, i) => (
@@ -32,26 +32,40 @@ export default function FormField({ field }: { field: { label: string; type: str
               </tbody>
             </table>
           ) : (
-            <span className="text-transparent">Write here...</span>
+            <span className="text-transparent print:hidden">Write here...</span>
           )}
         </div>
       ) : field.type === "select" && field.options ? (
-        <div className="flex flex-wrap gap-2">
-          {field.options.map((option) => (
-            <label key={option} className="inline-flex items-center gap-1.5 text-xs border border-gray-300 rounded-full px-3 py-1.5 hover:border-primary/50 hover:bg-primary-light/50 cursor-pointer transition-colors">
-              <input type="radio" name={field.label} value={option} className="accent-primary" />
-              {option}
-            </label>
-          ))}
-        </div>
+        <>
+          {/* Screen: interactive radio pills */}
+          <div className="flex flex-wrap gap-2 print:hidden">
+            {field.options.map((option) => (
+              <label key={option} className="inline-flex items-center gap-1.5 text-xs border border-gray-300 rounded-full px-3 py-1.5 hover:border-primary/50 hover:bg-primary-light/50 cursor-pointer transition-colors">
+                <input type="radio" name={field.label} value={option} className="accent-primary" />
+                {option}
+              </label>
+            ))}
+          </div>
+          {/* Print: clean checkbox list */}
+          <div className="hidden print:block">
+            {field.options.map((option) => (
+              <label key={option} className="flex items-center gap-2 text-sm py-0.5">
+                <span className="inline-block w-3.5 h-3.5 border border-black rounded-sm flex-shrink-0" />
+                {option}
+              </label>
+            ))}
+          </div>
+        </>
       ) : field.type === "checkbox" ? (
-        <div className="flex items-center gap-2">
-          <input type="checkbox" className="h-4 w-4 accent-primary rounded" />
+        <div className="flex items-center gap-2 print-field">
+          <input type="checkbox" className="h-4 w-4 accent-primary rounded print:hidden" />
+          <span className="inline-block w-4 h-4 border border-black rounded-sm hidden print:inline-block flex-shrink-0" />
           <span className="text-sm text-muted">Yes</span>
         </div>
       ) : (
-        <div className="w-full border-2 border-dashed border-gray-300 rounded-lg px-3 py-2.5 text-sm text-muted bg-gray-50/50 hover:border-primary/30 transition-colors">
-          <span className="text-transparent">Enter text...</span>
+        <div className="w-full border-2 border-dashed border-gray-300 rounded-lg px-3 py-2.5 text-sm text-muted bg-gray-50/50 hover:border-primary/30 transition-colors print-field">
+          <span className="text-transparent print:hidden">Enter text...</span>
+          <span className="hidden print:inline print:text-transparent">Enter text...</span>
         </div>
       )}
     </div>
