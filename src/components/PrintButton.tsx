@@ -1,10 +1,22 @@
 "use client";
 
+import { useCallback } from "react";
+
 export default function PrintButton({ label = "Print This Page" }: { label?: string }) {
+  const handlePrint = useCallback(() => {
+    try {
+      window.print();
+    } catch {
+      // Fallback: open print via shortcut hint
+      alert("Press Ctrl+P (or Cmd+P on Mac) to print this page.");
+    }
+  }, []);
+
   return (
     <button
-      onClick={() => window.print()}
-      className="no-print inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium shadow-sm"
+      onClick={handlePrint}
+      type="button"
+      className="no-print inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium shadow-sm print:hidden"
       aria-label="Print this page"
     >
       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
