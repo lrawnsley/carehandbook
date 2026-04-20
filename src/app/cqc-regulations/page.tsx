@@ -70,7 +70,7 @@ export default function CQCRegulationsPage() {
             For care homes in England, the CQC is the primary regulator. Care homes in 
             Scotland are regulated by the Care Inspectorate; in Wales by Care Inspectorate 
             Wales; and in Northern Ireland by the Regulation and Quality Improvement 
-            Authority (RQIA). The resources on CareKit focus on the English CQC framework.
+            Authority (RQIA).            The resources on Care Handbook focus on the English CQC framework.
           </p>
         </div>
         <div className="mt-4 p-4 bg-primary-light/30 rounded-lg border border-primary/20">

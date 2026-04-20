@@ -79,7 +79,7 @@ export default function SearchBar({ onClose }: SearchBarProps) {
           onFocus={() => setIsFocused(true)}
           placeholder="Search CQC, templates, medication..."
           className="w-full px-4 py-3 pl-10 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30 text-base min-h-[44px]"
-          aria-label="Search CareKit"
+          aria-label="Search Care Handbook"
           aria-autocomplete="list"
           aria-expanded={showDropdown}
           role="combobox"

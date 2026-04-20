@@ -24,11 +24,11 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "CareKit — UK Care Home Resource Hub",
-    template: "%s | CareKit",
+    default: "Care Handbook — UK Care Home Resource Hub",
+    template: "%s | Care Handbook",
   },
   description:
-    "Free UK care home resources: CQC regulation guides, handover templates, care plan templates, and medication guidance for care assistants and nurses.",
+    "Free UK care home resources: CQC regulation guides, dementia care, handover templates, care plan templates, medication guidance, and more for care assistants and nurses.",
   keywords: [
     "CQC",
     "care home",
@@ -38,16 +38,19 @@ export const metadata: Metadata = {
     "care plan",
     "MAR chart",
     "medication guidance",
+    "dementia care",
+    "infection control",
+    "falls prevention",
     "care assistant",
     "nursing home",
   ],
   openGraph: {
-    title: "CareKit — UK Care Home Resource Hub",
+    title: "Care Handbook — UK Care Home Resource Hub",
     description:
-      "Free UK care home resources: CQC regulation guides, handover templates, care plan templates, and medication guidance.",
+      "Free UK care home resources: CQC regulation guides, dementia care, handover templates, care plan templates, and medication guidance.",
     type: "website",
     locale: "en_GB",
-    siteName: "CareKit",
+    siteName: "Care Handbook",
   },
 };
 

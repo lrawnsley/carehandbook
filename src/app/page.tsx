@@ -10,16 +10,16 @@ export default function Home() {
           <div className="max-w-3xl">
             <div className="flex items-center gap-3 mb-6">
               <span className="text-4xl" role="img" aria-label="medical symbol">⚕️</span>
-              <span className="text-2xl font-bold tracking-tight">CareKit</span>
+              <span className="text-2xl font-bold tracking-tight">Care Handbook</span>
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-6">
               Free Resources for UK Care Home Staff
             </h1>
             <p className="text-lg sm:text-xl text-white/80 leading-relaxed mb-8 max-w-2xl">
-              CQC regulation guides, printable handover templates, care plan and 
-              risk assessment forms, medication administration guidance — all in 
-              one place. Built for care assistants, nurses, and managers working 
-              in UK care homes.
+              Dementia care guides, CQC regulation resources, printable handover templates, 
+              care plan and risk assessment forms, medication guidance, infection control, 
+              and more — all in one place. Built for care assistants, nurses, and managers 
+              working in UK care homes.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link
@@ -45,9 +45,10 @@ export default function Home() {
           <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">
             Everything You Need, Organised
           </h2>
-          <p className="text-muted text-base sm:text-lg max-w-2xl mx-auto">
-            Four core sections covering the essential areas of UK care home work. 
-            Each resource is free, printable, and based on current CQC standards.
+          <p className="text-lg text-muted leading-relaxed">
+            Six core sections covering the essential areas of UK care home work, 
+            plus specialist resources for dementia care, infection control, falls prevention, 
+            nutrition, and more. Each resource is free, printable, and based on current CQC standards.
           </p>
         </div>
 
@@ -89,11 +90,11 @@ export default function Home() {
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
             {[
+              { href: "/dementia-care", label: "Dementia Care", icon: "🧠" },
               { href: "/medication-guidance/five-rights", label: "5 Rights", icon: "💊" },
-              { href: "/medication-guidance/mar-chart", label: "MAR Charts", icon: "📊" },
-              { href: "/handover-templates/shift-handover", label: "Shift Handover", icon: "📋" },
-              { href: "/templates/care-plan", label: "Care Plan", icon: "📝" },
-              { href: "/templates/incident-report", label: "Incident Form", icon: "⚠️" },
+              { href: "/infection-control/hand-hygiene", label: "Hand Hygiene", icon: "🦠" },
+              { href: "/falls/risk-assessment", label: "Falls Risk", icon: "🚨" },
+              { href: "/nutrition/must-screening", label: "MUST Screening", icon: "🍽️" },
               { href: "/cqc-regulations/five-key-questions", label: "5 Key Questions", icon: "🛡️" },
             ].map((link) => (
               <Link
@@ -117,7 +118,7 @@ export default function Home() {
             <div>
               <h3 className="font-bold text-foreground text-lg mb-2">Important Notice</h3>
               <p className="text-muted leading-relaxed">
-                CareKit is a <strong>guidance resource only</strong>. It does not replace your organisation&apos;s 
+                Care Handbook is a <strong>guidance resource only</strong>. It does not replace your organisation&apos;s 
                 policies, formal training, or current CQC standards. Always follow your employer&apos;s 
                 specific procedures and consult your line manager or the relevant professional body 
                 if you are unsure. The information here is based on current CQC frameworks and UK 

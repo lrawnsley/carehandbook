@@ -54,7 +54,7 @@ export default async function HandoverTemplatePage({ params }: { params: Promise
       <div className="hidden print:block print-header">
         <div className="flex justify-between items-center border-b-2 border-black pb-2 mb-4">
           <div>
-            <span className="text-lg font-bold">CareKit</span>
+            <span className="text-lg font-bold">Care Handbook</span>
           </div>
           <div className="text-right">
             <span className="text-sm font-semibold">{template.title}</span>

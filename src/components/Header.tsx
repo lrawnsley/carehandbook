@@ -4,22 +4,44 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import SearchBar from "./SearchBar";
 
-const navItems = [
-  { href: "/cqc-regulations", label: "CQC Regulations" },
-  { href: "/handover-templates", label: "Handover Templates" },
+interface NavItem {
+  href: string;
+  label: string;
+  subItems?: { href: string; label: string }[];
+}
+
+const navItems: NavItem[] = [
+  { href: "/dementia-care", label: "Dementia Care" },
+  { href: "/cqc-regulations", label: "CQC" },
   { href: "/templates", label: "Care Templates" },
-  { href: "/medication-guidance", label: "Medication Guidance" },
-  { href: "/employee-responsibilities", label: "Employee Responsibilities" },
-  { href: "/staff-resources", label: "Staff Resources" },
+  { href: "/medication-guidance", label: "Medication" },
+  { href: "/infection-control", label: "IPC" },
+  { href: "/falls", label: "Falls" },
+  { href: "/nutrition", label: "Nutrition" },
+  {
+    href: "#more",
+    label: "More ▾",
+    subItems: [
+      { href: "/safeguarding", label: "Safeguarding" },
+      { href: "/fire-safety", label: "Fire Safety" },
+      { href: "/end-of-life", label: "End of Life Care" },
+      { href: "/admission-discharge", label: "Admission & Discharge" },
+      { href: "/complaints", label: "Complaints" },
+      { href: "/handover-templates", label: "Handover Templates" },
+      { href: "/employee-responsibilities", label: "Employee Responsibilities" },
+      { href: "/staff-resources", label: "Staff Resources" },
+    ],
+  },
 ];
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Close mobile menu on route change (clicking a link)
   // Close menus when clicking/tapping outside
   useEffect(() => {
     function handleOutside(e: Event) {
@@ -30,6 +52,13 @@ export default function Header() {
         !menuRef.current.contains(target)
       ) {
         setMobileMenuOpen(false);
+      }
+      if (
+        dropdownOpen &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(target)
+      ) {
+        setDropdownOpen(false);
       }
       if (
         searchOpen &&
@@ -45,7 +74,7 @@ export default function Header() {
       document.removeEventListener("mousedown", handleOutside);
       document.removeEventListener("touchstart", handleOutside);
     };
-  }, [mobileMenuOpen, searchOpen]);
+  }, [mobileMenuOpen, searchOpen, dropdownOpen]);
 
   // Close menus on Escape key
   useEffect(() => {
@@ -53,6 +82,7 @@ export default function Header() {
       if (e.key === "Escape") {
         setMobileMenuOpen(false);
         setSearchOpen(false);
+        setDropdownOpen(false);
       }
     }
     document.addEventListener("keydown", handleEscape);
@@ -74,11 +104,13 @@ export default function Header() {
   // Close search when mobile menu opens, and vice versa
   const toggleMenu = () => {
     setSearchOpen(false);
+    setDropdownOpen(false);
     setMobileMenuOpen((prev) => !prev);
   };
 
   const toggleSearch = () => {
     setMobileMenuOpen(false);
+    setDropdownOpen(false);
     setSearchOpen((prev) => !prev);
   };
 
@@ -93,25 +125,53 @@ export default function Header() {
             onClick={() => {
               setMobileMenuOpen(false);
               setSearchOpen(false);
+              setDropdownOpen(false);
             }}
           >
-            <span className="text-2xl" role="img" aria-label="CareKit cross symbol">
+            <span className="text-2xl" role="img" aria-label="Care Handbook symbol">
               ⚕️
             </span>
-            <span className="text-xl font-bold tracking-tight">CareKit</span>
+            <span className="text-xl font-bold tracking-tight">Care Handbook</span>
           </Link>
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-1" aria-label="Main navigation">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="px-3 py-2 rounded-md text-sm font-medium text-white/90 hover:text-white hover:bg-primary-dark transition-colors no-underline"
-              >
-                {item.label}
-              </Link>
-            ))}
+            {navItems.map((item) =>
+              item.subItems ? (
+                <div key={item.href} ref={dropdownRef} className="relative">
+                  <button
+                    onClick={() => setDropdownOpen((prev) => !prev)}
+                    className="px-3 py-2 rounded-md text-sm font-medium text-white/90 hover:text-white hover:bg-primary-dark transition-colors inline-flex items-center gap-1"
+                    aria-expanded={dropdownOpen}
+                    aria-haspopup="true"
+                  >
+                    {item.label}
+                  </button>
+                  {dropdownOpen && (
+                    <div className="absolute right-0 top-full mt-1 w-56 bg-white text-gray-800 rounded-lg shadow-xl border border-gray-200 overflow-hidden z-[60]">
+                      {item.subItems.map((sub) => (
+                        <Link
+                          key={sub.href}
+                          href={sub.href}
+                          onClick={() => setDropdownOpen(false)}
+                          className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-primary-light/20 hover:text-primary transition-colors no-underline"
+                        >
+                          {sub.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="px-3 py-2 rounded-md text-sm font-medium text-white/90 hover:text-white hover:bg-primary-dark transition-colors no-underline"
+                >
+                  {item.label}
+                </Link>
+              )
+            )}
             <button
               onClick={toggleSearch}
               className="ml-2 p-2 rounded-md text-white/90 hover:text-white hover:bg-primary-dark transition-colors"
@@ -215,16 +275,34 @@ export default function Header() {
         >
           <nav className="px-4 py-3" aria-label="Mobile navigation">
             <div className="space-y-1">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block px-4 py-3 rounded-md text-base font-medium text-white/90 hover:text-white hover:bg-primary-dark transition-colors no-underline min-h-[44px] flex items-center"
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {navItems.map((item) =>
+                item.subItems ? (
+                  <div key="more-group" className="border-t border-white/20 pt-2 mt-2">
+                    <p className="px-4 py-1 text-xs font-semibold text-white/60 uppercase tracking-wider">
+                      More Sections
+                    </p>
+                    {item.subItems.map((sub) => (
+                      <Link
+                        key={sub.href}
+                        href={sub.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block px-4 py-3 rounded-md text-base font-medium text-white/90 hover:text-white hover:bg-primary-dark transition-colors no-underline min-h-[44px] flex items-center"
+                      >
+                        {sub.label}
+                      </Link>
+                    ))}
+                  </div>
+                ) : (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block px-4 py-3 rounded-md text-base font-medium text-white/90 hover:text-white hover:bg-primary-dark transition-colors no-underline min-h-[44px] flex items-center"
+                  >
+                    {item.label}
+                  </Link>
+                )
+              )}
             </div>
           </nav>
         </div>
