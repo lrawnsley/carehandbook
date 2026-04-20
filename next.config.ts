@@ -5,8 +5,7 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  // GitHub Pages serves the site at /carekit — remove basePath if using a custom domain
-  basePath: "/carekit",
+  // Custom domain: carehandbook.co.uk — no basePath needed
 };
 
 export default nextConfig;
