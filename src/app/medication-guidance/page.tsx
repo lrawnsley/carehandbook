@@ -93,7 +93,7 @@ export default function MedicationGuidancePage() {
           </li>
           <li className="flex items-start gap-2">
             <span className="text-primary">•</span>
-            <strong>NICE Guideline SC1</strong> — Managing medicines in care homes (2014, last updated 2023)
+            <strong>NICE Guideline SC1</strong> — Managing medicines in care homes (2014, last reviewed 2017)
           </li>
           <li className="flex items-start gap-2">
             <span className="text-primary">•</span>

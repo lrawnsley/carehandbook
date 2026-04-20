@@ -114,7 +114,7 @@ export default function CQCRegulationsPage() {
         <ul className="space-y-3">
           <li>
             <a
-              href="https://www.cqc.org.uk/about-us/how-we-use-information/how-we-monitor-services"
+              href="https://www.cqc.org.uk/about-us/how-we-do-our-job"
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary hover:underline inline-flex items-center gap-1.5 text-sm"
@@ -124,7 +124,7 @@ export default function CQCRegulationsPage() {
           </li>
           <li>
             <a
-              href="https://www.cqc.org.uk/about-us/how-we-regulate/how-we-inspect-services"
+              href="https://www.cqc.org.uk/about-us/how-we-do-our-job"
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary hover:underline inline-flex items-center gap-1.5 text-sm"
@@ -134,7 +134,7 @@ export default function CQCRegulationsPage() {
           </li>
           <li>
             <a
-              href="https://www.cqc.org.uk/about-us/how-we-regulate/how-we-use-ratings"
+              href="https://www.cqc.org.uk/about-us/how-we-do-our-job"
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary hover:underline inline-flex items-center gap-1.5 text-sm"
@@ -144,7 +144,7 @@ export default function CQCRegulationsPage() {
           </li>
           <li>
             <a
-              href="https://www.cqc.org.uk/guidance-providers/regulations-enforcement/regulations-service-providers-must-meet"
+              href="https://www.cqc.org.uk/guidance-providers/regulations-enforcement/regulations-service-providers-managers"
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary hover:underline inline-flex items-center gap-1.5 text-sm"
@@ -154,7 +154,7 @@ export default function CQCRegulationsPage() {
           </li>
           <li>
             <a
-              href="https://www.cqc.org.uk/about-us/our-work/fundamental-standards"
+              href="https://www.cqc.org.uk/about-us/fundamental-standards"
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary hover:underline inline-flex items-center gap-1.5 text-sm"

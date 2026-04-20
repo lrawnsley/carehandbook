@@ -150,7 +150,7 @@ export const employmentRights: EmploymentRight[] = [
   {
     title: "National Minimum Wage and National Living Wage",
     content:
-      "All care workers are entitled to be paid at least the National Minimum Wage (NMW) or National Living Wage (NLW), depending on their age. As of April 2025, the rates are: NLW (age 21 and over): £12.21 per hour; 18–20 year rate: £10.00 per hour; 16–17 year rate: £7.55 per hour; Apprentice rate: £7.55 per hour. Sleep-in workers must be paid at least the NMW/NLW for time they are awake and working, and may be entitled to the NMW for the whole sleep-in shift depending on the circumstances. If you suspect you are being paid below the minimum wage, you can report this to HMRC's National Minimum Wage Enforcement team or to ACAS. Your employer cannot dismiss you or treat you unfairly for asserting your NMW rights.",
+      "All care workers are entitled to be paid at least the National Minimum Wage (NMW) or National Living Wage (NLW), depending on their age. As of April 2026, the rates are: NLW (age 21 and over): £12.71 per hour; 18–20 year rate: £10.85 per hour; 16–17 year rate: £8.00 per hour; Apprentice rate: £8.00 per hour. Sleep-in workers must be paid at least the NMW/NLW for time they are awake and working, and may be entitled to the NMW for the whole sleep-in shift depending on the circumstances. If you suspect you are being paid below the minimum wage, you can report this to HMRC's National Minimum Wage Enforcement team or to ACAS. Your employer cannot dismiss you or treat you unfairly for asserting your NMW rights.",
   },
   {
     title: "Grievance Procedures",
